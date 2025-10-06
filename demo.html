@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Registration Form</title>
+    <style>
+      body {
+        color: #f5f5f5;
+        background: black;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 38px;
+        font-weight: 900;
+        color: #ffffff;
+        background: linear-gradient(90deg, #2c5364, #203a43, #0f2027);
+        padding: 25px;
+        border-radius: 20px;
+        margin: 30px auto;
+        width: 520px;
+        border: 3px solid #4a90e2;
+        box-shadow: 2px 4px 30px rgb(0, 157, 255);
+      }
+
+      form {
+        width: 600px;
+        margin: auto;
+        padding: 10px;
+      }
+
+      fieldset {
+        border: 3px solid #4a90e2;
+        border-radius: 25px;
+        padding: 30px;
+        padding-right: 70px;
+        background: linear-gradient(
+          135deg,
+          rgba(26, 26, 46, 0.95),
+          rgba(22, 33, 62, 0.95)
+        );
+      }
+
+      legend {
+        color: #ffffff;
+        font-weight: 900;
+        font-size: 20px;
+        padding: 8px 25px;
+        background: linear-gradient(90deg, #4a90e2, #357abd);
+        border-radius: 15px;
+        border: 2px solid #5ca3e6;
+      }
+
+      table {
+        width: 100%;
+        border-radius: 0;
+      }
+
+      td {
+        padding: 12px 8px;
+      }
+
+      label {
+        color: #ffd500;
+        font-weight: 900;
+        font-size: 15px;
+      }
+
+      input,
+      textarea,
+      select {
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 15px;
+      }
+
+      input[type="text"],
+      input[type="tel"],
+      input[type="email"],
+      input[type="password"],
+      input[type="date"],
+      input[type="number"] {
+        width: 100%;
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        color: #ffffff;
+        font-weight: 600;
+        border: 2px solid #4a90e2;
+      }
+
+      input:required {
+        border: 2px solid #e74c3c;
+      }
+
+      input:optional {
+        border: 2px dashed #27ae60;
+      }
+
+      input[readonly] {
+        background: linear-gradient(90deg, #34495e, #2c3e50);
+        color: #ecf0f1;
+        font-weight: 800;
+        border: 3px solid #7f8c8d;
+      }
+
+      input:focus {
+        background: linear-gradient(135deg, #4a90e2, #357abd);
+        font-weight: 700;
+        color: #ffffff;
+        border: 3px solid #5ca3e6;
+      }
+
+      textarea:focus,
+      select:focus {
+        background: linear-gradient(135deg, #4a90e2, #357abd);
+        color: #ffffff;
+        border: 3px solid #5ca3e6;
+      }
+
+      p {
+        display: none;
+        color: #ffffff;
+        background: linear-gradient(90deg, #27ae60, #229954);
+        font-family: monospace;
+        font-size: 13px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin: 8px 0;
+        border: 2px solid #2ecc71;
+        font-weight: 600;
+      }
+
+      /* Show p (tooltip) when input focused */
+      input:focus + p,
+      input:focus ~ p {
+        display: block;
+      }
+
+      img.valid,
+      img.invalid {
+        display: none;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+
+      /* Show both valid and invalid images when field is focused */
+      input[type="email"]:focus ~ img.valid,
+      input[type="email"]:focus ~ img.invalid,
+      input[name="age"]:focus ~ img.valid,
+      input[name="age"]:focus ~ img.invalid {
+        display: inline-block;
+      }
+
+      /* Success and error image styles */
+      input[type="email"]:focus:valid ~ img.valid,
+      input[name="age"]:focus:in-range:valid ~ img.valid {
+        border: 3px solid #27ae60;
+        border-radius: 50%;
+        padding: 4px;
+        background: linear-gradient(135deg, #27ae60, #2ecc71);
+      }
+
+      input[type="email"]:focus:invalid ~ img.invalid,
+      input[name="age"]:focus:out-of-range:invalid ~ img.invalid {
+        border: 3px solid #e74c3c;
+        border-radius: 50%;
+        padding: 4px;
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+      }
+
+      input[type="radio"] {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+        border: 3px solid #4a90e2;
+      }
+
+      input[type="radio"]:checked {
+        width: 26px;
+        height: 26px;
+        border: 4px solid #5ca3e6;
+        background: linear-gradient(135deg, #4a90e2, #357abd);
+      }
+
+      input[type="radio"]:checked + label {
+        color: #5ca3e6;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      input[type="file"] {
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        color: #ffffff;
+        border: 3px solid #4a90e2;
+        cursor: pointer;
+        width: 100%;
+        font-weight: 600;
+      }
+
+      input[type="file"]:focus {
+        background: linear-gradient(135deg, #4a90e2, #357abd);
+        color: #ffffff;
+        border: 3px solid #5ca3e6;
+      }
+
+      input[type="submit"],
+      input[type="reset"] {
+        background: linear-gradient(135deg, #4a90e2, #357abd);
+        color: #ffffff;
+        border: 3px solid #5ca3e6;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 900;
+        font-size: 18px;
+        padding: 16px;
+      }
+
+      input[type="submit"]:focus,
+      input[type="reset"]:focus {
+        background: linear-gradient(135deg, #357abd, #2c5f8d);
+        color: #ffffff;
+        border: 4px solid #5ca3e6;
+      }
+
+      input[type="submit"]:hover,
+      input[type="reset"]:hover {
+        background: linear-gradient(135deg, #1082ec, #4a90e2);
+        color: #ffffff;
+        border: 3px solid #7db3e8;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      input[type="reset"] {
+        width: 48%;
+      }
+
+      select {
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        border: 2px solid #4a90e2;
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        width: 100%;
+      }
+
+      textarea {
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        border: 2px solid #4a90e2;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 15px;
+        width: 100%;
+        resize: none;
+      }
+    </style>
+
+    <!-- <style>
+      body {
+        color: #f5f5f5;
+        background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #1a1a2e);
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 38px;
+        font-weight: 900;
+        color: #ffffff;
+        background: linear-gradient(90deg, #2c5364, #203a43, #0f2027);
+        padding: 25px;
+        border-radius: 20px;
+        margin: 30px auto;
+        width: 520px;
+        border: 3px solid #4a90e2;
+      }
+
+      form {
+        width: 520px;
+        margin: auto;
+        padding: 10px;
+      }
+
+      fieldset {
+        border: 3px solid #4a90e2;
+        border-radius: 25px;
+        padding: 30px;
+        background: linear-gradient(
+          135deg,
+          rgba(26, 26, 46, 0.95),
+          rgba(22, 33, 62, 0.95)
+        );
+      }
+
+      legend {
+        color: #ffffff;
+        font-weight: 900;
+        font-size: 20px;
+        padding: 8px 25px;
+        background: linear-gradient(90deg, #4a90e2, #357abd);
+        border-radius: 15px;
+        border: 2px solid #5ca3e6;
+      }
+
+      table {
+        width: 100%;
+        border-radius: 0;
+      }
+
+      td {
+        padding: 12px 8px;
+      }
+
+      label {
+        color: #5ca3e6;
+        font-weight: 900;
+        font-size: 15px;
+      }
+
+      input,
+      textarea,
+      select {
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 15px;
+      }
+
+      input[type="text"],
+      input[type="tel"],
+      input[type="email"],
+      input[type="password"],
+      input[type="date"],
+      input[type="number"] {
+        width: 100%;
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        color: #ffffff;
+        font-weight: 600;
+        border: 2px solid #4a90e2;
+      }
+
+      input[readonly] {
+        background: linear-gradient(90deg, #34495e, #2c3e50);
+        color: #ecf0f1;
+        font-weight: 800;
+        border: 3px solid #7f8c8d;
+      }
+
+      p {
+        /* To show the tooltip by default just set display: block; */
+        display: block;
+        color: #ffffff;
+        background: linear-gradient(90deg, #27ae60, #229954);
+        font-family: monospace;
+        font-size: 13px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin: 8px 0;
+        border: 2px solid #2ecc71;
+        font-weight: 600;
+      }
+
+      img.valid,
+      img.invalid {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        border-radius: 50%;
+        padding: 4px;
+      }
+
+      /* Add classes for valid/invalid (to be toggled from JS) */
+      img.valid {
+        border: 3px solid #27ae60;
+        background: linear-gradient(135deg, #27ae60, #2ecc71);
+      }
+      img.invalid {
+        border: 3px solid #e74c3c;
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+      }
+
+      input[type="radio"] {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+        border: 3px solid #4a90e2;
+      }
+
+      input[type="file"] {
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        color: #ffffff;
+        border: 3px solid #4a90e2;
+        cursor: pointer;
+        width: 100%;
+        font-weight: 600;
+      }
+
+      input[type="submit"],
+      input[type="reset"] {
+        background: linear-gradient(135deg, #4a90e2, #357abd);
+        color: #ffffff;
+        border: 3px solid #5ca3e6;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 900;
+        font-size: 18px;
+        padding: 16px;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      input[type="reset"] {
+        width: 48%;
+      }
+
+      select {
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        border: 2px solid #4a90e2;
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        width: 100%;
+      }
+
+      textarea {
+        background: linear-gradient(135deg, #2c5364, #203a43);
+        border: 2px solid #4a90e2;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 15px;
+        width: 100%;
+        resize: none;
+      }
+    </style> -->
+  </head>
+  <body>
+    <h1>Course Registration Form</h1>
+    <form action>
+      <fieldset>
+        <legend>Personal Details</legend>
+        <table>
+          <tr>
+            <td><label for="fn">First Name*</label></td>
+            <td>
+              <input
+                type="text"
+                name="FN"
+                id="fn"
+                placeholder="Ex: HARSHIT"
+                required
+              />
+              <p>Enter your first name</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="ln">Surname</label></td>
+            <td>
+              <input type="text" name="LN" id="ln" placeholder="Ex: T" />
+              <p>Enter your surname (optional)</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="mob">Mobile Number*</label></td>
+            <td>
+              <input
+                type="tel"
+                name="mob"
+                id="mob"
+                placeholder="Ex: 987-897-0987"
+                required
+              />
+              <p>Enter your 10-digit mobile number</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="mail">Email*</label></td>
+            <td>
+              <input
+                type="email"
+                name="mail"
+                id="mail"
+                placeholder="Ex: harshit@gmail.com"
+                required
+              />
+              <p>Enter a valid email address</p>
+              <img
+                class="valid"
+                src="https://cdn-icons-png.flaticon.com/128/9671/9671968.png"
+                alt="Valid"
+              />
+              <img
+                class="invalid"
+                src="https://cdn-icons-png.flaticon.com/128/4302/4302064.png"
+                alt="Invalid"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="pwd">Password*</label></td>
+            <td>
+              <input
+                type="password"
+                name="pwd"
+                id="pwd"
+                placeholder="Min 8 characters"
+                minlength="8"
+                required
+              />
+              <p>Include 1 uppercase, 1 lowercase, 1 special character</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="cpwd">Confirm Password*</label></td>
+            <td>
+              <input
+                type="password"
+                name="cpwd"
+                id="cpwd"
+                placeholder="Re-enter password"
+                minlength="8"
+                required
+              />
+              <p>Must match password above</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="dob">Date of Birth*</label></td>
+            <td>
+              <input type="date" name="dob" id="dob" required />
+              <p>Select your date of birth</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="age">Age*</label></td>
+            <td>
+              <input
+                type="number"
+                name="age"
+                id="age"
+                min="18"
+                max="100"
+                placeholder="18-100"
+                required
+              />
+
+              <p>Age must be between 18 and 100</p>
+              <img
+                class="valid"
+                src="https://cdn-icons-png.flaticon.com/128/9671/9671968.png"
+                alt="Valid"
+              />
+              <img
+                class="invalid"
+                src="https://cdn-icons-png.flaticon.com/128/4302/4302064.png"
+                alt="Invalid"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label>Gender*</label></td>
+            <td>
+              <input type="radio" name="gender" id="male" value="M" required />
+              <label for="male">Male</label>
+              <input type="radio" name="gender" id="female" value="F" />
+              <label for="female">Female</label>
+              <input type="radio" name="gender" id="others" value="C" />
+              <label for="others">Others</label>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="country">Select Country*</label></td>
+            <td>
+              <select name="Country" id="country" required>
+                <option value="">-- Select --</option>
+                <option value="INDIA">India</option>
+                <option value="USA">USA</option>
+                <option value="China">China</option>
+              </select>
+              <p>Choose your country</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="pic">Upload Picture</label></td>
+            <td>
+              <input type="file" name="pic" id="pic" />
+              <p>Upload a profile picture (optional)</p>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <br />
+      <fieldset>
+        <legend>Course Details</legend>
+        <table>
+          <tr>
+            <td><label for="course">Select Course*</label></td>
+            <td>
+              <select name="Course" id="course" required>
+                <option value="">-- Select --</option>
+                <option value="PFS">Python Full Stack</option>
+                <option value="JFS">Java Full Stack</option>
+                <option value="CJ">Core Java</option>
+                <option value="PDS">Python for Data Science</option>
+              </select>
+              <p>Choose the course you want to enroll in</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Delivery Mode*</label></td>
+            <td>
+              <input type="radio" name="mode" id="online" value="ON" required />
+              <label for="online">Online</label>
+              <input type="radio" name="mode" id="offline" value="OFF" />
+              <label for="offline">Offline</label>
+              <p>Select your preferred learning mode</p>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="institute">Institute Name</label></td>
+            <td>
+              <input type="text" id="institute" value="TAP ACADEMY" readonly />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="comments">Comments</label></td>
+            <td>
+              <textarea
+                id="comments"
+                rows="4"
+                placeholder="Any additional comments or questions..."
+              ></textarea>
+              <p>Share any additional information (optional)</p>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <br />
+      <input type="reset" value="Clear Form" />
+      <input type="submit" value="Submit Registration" />
+    </form>
+  </body>
+</html>
